@@ -3,6 +3,10 @@ import http from "http";
 import {Server} from "socket.io";
 import express from "express"
 import {instrument} from "@socket.io/admin-ui"
+import path from 'path';
+
+
+const __dirname = path.resolve();
 
 const app = express();
 
