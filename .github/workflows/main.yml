@@ -11,7 +11,8 @@ jobs:
       with:
         node-version: 14
     - run: npm install
-    - run: npm run dev
+    - run: node ./src/server.js
+    - run: ^C
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@master
       with:
