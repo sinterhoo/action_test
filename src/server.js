@@ -4,17 +4,20 @@ import {Server} from "socket.io";
 import express from "express"
 import {instrument} from "@socket.io/admin-ui"
 import path from 'path';
+import request from "supertest";
 
 
 const __dirname = path.resolve();
 
-const app = express();
+let app = express();
 
 app.set("view engine", "pug");
 app.set("views", __dirname + "/views");
 app.use("/public", express.static(__dirname + "/public"));
 app.get("/", (req, res) => res.render("home"));
-app.get("/*", (req,res) => res.redirect("/"));
+app.get("/add", (req,res) => res.send(200));
+
+request(app).get("/add").expect(200);
 
 const httpServer = http.createServer(app);
 const wsServer = new Server(httpServer,{
@@ -72,6 +75,8 @@ wsServer.on("connection", (socket) => {
 
 const handleListen = () => console.log(`Listening on http://localhost:3000`);
 httpServer.listen(3000, handleListen);
+
+export default app;
 
 
 // const handleListen = () => console.log(`Listening on http://localhost:3000`);
