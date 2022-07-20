@@ -17,8 +17,6 @@ app.use("/public", express.static(__dirname + "/public"));
 app.get("/", (req, res) => res.render("home"));
 app.get("/add", (req,res) => res.send(200));
 
-request(app).get("/add").expect(200);
-
 const httpServer = http.createServer(app);
 const wsServer = new Server(httpServer,{
   cors: {
